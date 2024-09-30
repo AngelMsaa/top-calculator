@@ -1,5 +1,6 @@
 body, html {
-    background-color: whitesmoke;
+    font-family: 'VT323', monos;
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,11 +9,27 @@ body, html {
 
 button {
     width: 80px;
+    font-family: 'VT323', monos;
     height: 80px;
+    font-weight: 500;
+    font-size: 48px;
+    background-color: rgb(15, 15, 15);
+    color: rgb(156, 198, 133);
+    border-bottom: 4px solid rgb(43, 43, 43);
+    border-right: 4px solid rgb(43, 43, 43);
+}
+
+.operandButton {
+    font-size: 32px;
+}
+
+#clear {
+    text-align: left;
+    padding-left: 24px;
 }
 
 #calculatorBody {
-    background-color: white;
+    background-color: black;
     display: flex;
     flex-wrap: wrap;
     width: 320px;
@@ -20,20 +37,32 @@ button {
 }
 
 #calculatorDisplay {
-    height: 78px;
+    height: 112px;
     width: 314px ;
     margin-bottom: 40px;
-    background-color: whitesmoke;
+    background-color: rgb(43, 43, 43);
     display: flex;
     justify-content: end;
     align-items: end;
     padding: 16px;
     user-select: none;
     flex-direction: column;
+    color: chartreuse;
+}
+
+#calculatorDisplayTop {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 32px;
 }
 
 #displayValue {
-    font-size: 48px;
+    font-size: 80px;
+}
+
+#displayOperand {
+    width: 100%;
 }
 
 #clear {
