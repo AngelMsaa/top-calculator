@@ -1,16 +1,23 @@
-
+// Query calculator body and create listeners for clicks and keydown
 const calculator = document.querySelector("#calculatorBody")
 calculator.addEventListener("click", handleClick);
-document.addEventListener("keypress", handleKeyPress)
+document.addEventListener("keydown", handleKeyPress)
 
+// Select calculator display spans to showcase information
 const displayValueSelector = document.querySelector("#displayValue")
 const displayOperandSelector = document.querySelector("#displayOperand")
 const displayResultSelector = document.querySelector("#result")
 
+// Initialize calculator state variables
 let currentValue = 0;
 let currentOperand = "";
 let result = 0;
 
+
+/*
+ * Handles click events on the calculator. 
+ * Routes clicks based on the button type (number, operand, action)
+*/
 function handleClick(event) {
     const clickedElement = event.target;
 
@@ -30,6 +37,10 @@ function handleClick(event) {
     }
 }
 
+/**
+ * Handles keypress events to allow for keyboard input.
+ * Processes number keys, operands, and special keys (Enter, Escape).
+ */
 function handleKeyPress(event) {
     const pressedKey = event.key;
 
@@ -44,6 +55,9 @@ function handleKeyPress(event) {
     }
 }
 
+/**
+ * Performs addition and ensures precision for floating-point results.
+ */
 const add = (x, y) => {
     const result = Number(x) + Number(y);
     if (result % 1 === 0) {
@@ -53,6 +67,9 @@ const add = (x, y) => {
     }
 };
 
+/**
+ * Performs subtraction and ensures precision for floating-point results.
+ */
 const subtract = (x, y) => {
     const result = Number(x) - Number(y);
     if (result % 1 === 0) {
@@ -62,6 +79,9 @@ const subtract = (x, y) => {
     }
 };
 
+/**
+ * Performs multiplication and ensures precision for floating-point results.
+ */
 const multiply = (x, y) => {
     const result = Number(x) * Number(y);
     if (result % 1 === 0) {
@@ -71,6 +91,9 @@ const multiply = (x, y) => {
     }
 };
 
+/**
+ * Performs division and ensures precision for floating-point results.
+ */
 const divide = (x, y) => {
     const result = Number(x) / Number(y);
     if (result % 1 === 0) {
@@ -80,6 +103,9 @@ const divide = (x, y) => {
     }
 };
 
+/**
+ * Updates the display depending on the type of update (number, operand, result, or all).
+ */
 function updateDisplayValue(type) {
     if (type == "num") {
         displayValueSelector.textContent = currentValue;
@@ -94,6 +120,10 @@ function updateDisplayValue(type) {
     }
 }
 
+/**
+ * Handles selecting a number (via button or keypress).
+ * Updates the currentValue and the display.
+ */
 function selectNumber(element, keystroke) {
     if (element) {
         if (element.textContent === "." && !currentValue.toString().includes(".")) {
@@ -119,6 +149,10 @@ function selectNumber(element, keystroke) {
     updateDisplayValue("num");
 }
 
+/**
+ * Handles selecting an operand (via button or keypress).
+ * Updates the result based on the current operation, if any.
+ */
 function selectOperand(element, keystroke) {
     if (currentValue !== 0) {
         if (currentOperand) {
@@ -137,12 +171,12 @@ function selectOperand(element, keystroke) {
                     break;
             }
         } else {
-            result = currentValue;
+            result = currentValue; // First operation
         }
-        currentValue = 0;
+        currentValue = 0; // Reset currentValue for next input
     }
 
-    if (element) {
+    if (element) { // If a button was clicked
         switch (element.id) {
             case "add":
                 currentOperand = "+";
@@ -158,13 +192,17 @@ function selectOperand(element, keystroke) {
                 break;
         }
         updateDisplayValue("all");
-    } else if (keystroke) {
+    } else if (keystroke) { // If a key was pressed
         currentOperand = keystroke;
         updateDisplayValue("all");
     }
 }
 
-function getResult() {
+/**
+ * Finalizes the calculation when the equals button or Enter key is pressed.
+ * Updates the display with the final result and resets the operand.
+ */
+function getResult() { 
     switch (currentOperand) {
         case "+":
             currentOperand = "";
@@ -183,10 +221,8 @@ function getResult() {
             currentValue = divide(result, currentValue);
             break;
     }
-    currentOperand = "";
-    result = "";
-    updateDisplayValue("operand");
-    updateDisplayValue("num");
+    currentOperand = ""; // Clear the current operand
+    result = ""; // Reset the result
     updateDisplayValue("all");
 }
 
@@ -194,5 +230,5 @@ function clearCalculator() {
     currentValue = 0;
     currentOperand = "";
     result = "";
-    updateDisplayValue("all");
+    updateDisplayValue("all"); // Refresh the display to show initial state
 }
