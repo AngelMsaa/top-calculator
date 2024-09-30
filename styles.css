@@ -1,0 +1,45 @@
+body, html {
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+button {
+    width: 80px;
+    height: 80px;
+}
+
+#calculatorBody {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    padding: 40px;
+}
+
+#calculatorDisplay {
+    height: 78px;
+    width: 314px ;
+    margin-bottom: 40px;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding: 16px;
+    user-select: none;
+    flex-direction: column;
+}
+
+#displayValue {
+    font-size: 48px;
+}
+
+#clear {
+    width: 240px;
+}
+
+#zero { 
+    width: 160px
+}
